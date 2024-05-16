@@ -1,4 +1,4 @@
 *.csv
 *.asv
-
+*.mat
 .git/

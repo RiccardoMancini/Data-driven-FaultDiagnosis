@@ -26,11 +26,11 @@ addpath("./utils/");
 table_pin = readDataBySensorName("pin");
 table_pin_TT = createTimetable(table_pin);
 
-% table_po = readDataBySensorName("po");
-% table_po_TT = createTimetable(table_po);
+table_po = readDataBySensorName("po");
+table_po_TT = createTimetable(table_po);
 
-% table_pdmp = readDataBySensorName("pdmp");
-% table_pdmp_TT = createTimetable(table_pdmp);
+table_pdmp = readDataBySensorName("pdmp");
+table_pdmp_TT = createTimetable(table_pdmp);
 
 
 
