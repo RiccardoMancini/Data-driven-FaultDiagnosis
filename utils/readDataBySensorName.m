@@ -11,7 +11,7 @@ function fullDataTable = readDataBySensorName(sensore)
     matching_files = string(matching_files);
     fullDataTable = [];
     colonnaEtichetta = 1;
-    max_columns = 673;
+    max_columns = 572;
     for i = 1:length(matching_files)
         disp(strcat("In elaborazione: ", matching_files(i)));
         dataTable = readtable(strcat("./data/", matching_files(i)), 'ReadVariableNames', false);
