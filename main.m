@@ -30,13 +30,15 @@ addpath("./utils/");
 % 
 % end
 
-table_pin= readDataBySensorName("pin");
-table_pin_TT = createTimetable(table_pin);
+% table_pin= readDataBySensorName("pin");
+% table_pin_TT = createTimetable(table_pin);
+% 
+% table_po = readDataBySensorName("po");
+% table_po_TT = createTimetable(table_po);
+% 
+% table_pdmp = readDataBySensorName("pdmp");
+% table_pdmp_TT = createTimetable(table_pdmp);
 
-table_po = readDataBySensorName("po");
-table_po_TT = createTimetable(table_po);
- 
-table_pdmp = readDataBySensorName("pdmp");
-table_pdmp_TT = createTimetable(table_pdmp);
 
 
+plotSignal(table_po_TT, 500)
