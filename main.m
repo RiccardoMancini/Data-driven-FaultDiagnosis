@@ -30,6 +30,7 @@ addpath("./utils/");
 % 
 % end
 
+
 % table_pin= readDataBySensorName("pin");
 % table_pin_TT = createTimetable(table_pin);
 % 
@@ -39,6 +40,27 @@ addpath("./utils/");
 % table_pdmp = readDataBySensorName("pdmp");
 % table_pdmp_TT = createTimetable(table_pdmp);
 
+% Stampa dei segnali
+% plotSignal(table_po_TT, 500)
+
+% Caricare le FeatureTable di ogni sensore singolo
+% modifica nome delle colonne aggiungendo il nome del sensore 
+% (da cambiare manualmente sia il nome che la table)
+% for i = 2:width(pdmpFeature)
+%     pdmpFeature.Properties.VariableNames{i} = ['PDMP/', pdmpFeature.Properties.VariableNames{i}];
+% end
+% 
+% clear i;
+
+T1 = pdmpFeature;
+T2 = pinFeature;
+T3 = poFeature;
+T2.Fault = [];
+T3.Fault = [];
+
+T = [T1(:, :), T2(:, :), T3(:, :)];
+
+trainingSet = replaceNaN(T);
 
 
-plotSignal(table_po_TT, 500)
+
