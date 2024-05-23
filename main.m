@@ -52,15 +52,16 @@ addpath("./utils/");
 % 
 % clear i;
 
-T1 = pdmpFeature;
-T2 = pinFeature;
-T3 = poFeature;
-T2.Fault = [];
-T3.Fault = [];
-
-T = [T1(:, :), T2(:, :), T3(:, :)];
-
-trainingSet = replaceNaN(T);
+% T1 = pdmpFeature;
+% T2 = pinFeature;
+% T3 = poFeature;
+% T2.Fault = [];
+% T3.Fault = [];
+% 
+% T = [T1(:, :), T2(:, :), T3(:, :)];
+% 
+% trainingSet = replaceNaN(T);
+% testSet = replaceNaN(T);
 
 
 
