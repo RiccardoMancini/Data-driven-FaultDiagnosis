@@ -2,7 +2,6 @@ addpath("./utils/");
 
 
 % Estrarre il numero di colonne minimo tra tutti i .csv (per evitare NaN alla fine della serie)
-
 % file_list = dir("./data/");
 % matching_files = [];
 % for i = 3:length(file_list)
@@ -31,27 +30,27 @@ addpath("./utils/");
 % end
 
 
+% LETTURA E CREAZIONE DI TABLE CON FAULT E TIMETABLE PER OGNI SENSORE
 % table_pin= readDataBySensorName("pin");
 % table_pin_TT = createTimetable(table_pin);
 % 
 % table_po = readDataBySensorName("po");
 % table_po_TT = createTimetable(table_po);
 % 
-% table_pdmp = readDataBySensorName("pdmp");
+% table_pdmp = readDataBySensorName("pdmp")d;
 % table_pdmp_TT = createTimetable(table_pdmp);
 
-% Stampa dei segnali
-% plotSignal(table_po_TT, 500)
 
-% Caricare le FeatureTable di ogni sensore singolo
-% modifica nome delle colonne aggiungendo il nome del sensore 
-% (da cambiare manualmente sia il nome che la table)
-% for i = 2:width(pdmpFeature)
-%     pdmpFeature.Properties.VariableNames{i} = ['PDMP/', pdmpFeature.Properties.VariableNames{i}];
+% AGGIUNTA NOME SENSORE ALLE COLONNE 
+% (DA RUNNARE POST ESTRAZIONE FEATURES) (da cambiare manualmente sia il nome che la variabile table)
+% for i = 2:width(poFeature)
+%     poFeature.Properties.VariableNames{i} = ['PO/', poFeature.Properties.VariableNames{i}];
 % end
 % 
 % clear i;
 
+
+% POST CONCATENAZIONE FEATURES IN UN'UNICA TABELLA
 % T1 = pdmpFeature;
 % T2 = pinFeature;
 % T3 = poFeature;
@@ -59,9 +58,20 @@ addpath("./utils/");
 % T3.Fault = [];
 % 
 % T = [T1(:, :), T2(:, :), T3(:, :)];
-% 
+
+
+% REPLACE DEI VALORI NaN NEL TRAIN E TEST SET
 % trainingSet = replaceNaN(T);
 % testSet = replaceNaN(T);
 
 
+% FORMATTAZIONE NOME COLONNE IN UN PATTERN E ORDINAMENTO COMUNE
+% trainingSet = reformatColumnsName(trainingSet);
+% testSet = reformatColumnsName(testSet);
+% [~, idx] = ismember(trainingSet.Properties.VariableNames, testSet.Properties.VariableNames);
+% testSet = testSet(:, idx);
+% clear idx;
 
+
+% PLOT DEI SEGNALI
+% plotSignal(table_po_TT, 500)

@@ -10,8 +10,11 @@ function finalTable = replaceNaN(T) % rimpiazza i valori NaN con la media della 
     
         for j = 1:length(nomiFeature)
             feature = nomiFeature{j};
-    
+        
             mediaFeature = mean(T.(feature)(indiciClasse), 'omitnan');
+            if j == 25
+                disp(mediaFeature);
+            end
             T.(feature)(indiciClasse & isnan(T.(feature))) = mediaFeature;
         end
     end

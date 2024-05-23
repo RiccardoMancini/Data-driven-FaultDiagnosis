@@ -1,6 +1,6 @@
 function fullDataTable = readDataBySensorName(sensore)
     
-    file_list = dir("./data/");
+    file_list = dir("./test-data/");
     matching_files = [];
     for i = 1:length(file_list)
         if contains(file_list(i).name, sensore) && ~file_list(i).isdir
@@ -14,7 +14,7 @@ function fullDataTable = readDataBySensorName(sensore)
     max_columns = 572;
     for i = 1:length(matching_files)        
         disp(strcat("In elaborazione: ", matching_files(i)));
-        dataTable = readtable(strcat("./data/", matching_files(i)), 'ReadVariableNames', false);
+        dataTable = readtable(strcat("./test-data/", matching_files(i)), 'ReadVariableNames', false);
         dataTable = dataTable(: , 1:max_columns);
         
         % Converti le colonne in numeri reali (tranne l'etichetta)
