@@ -37,7 +37,7 @@ addpath("./utils/");
 % table_po = readDataBySensorName("po");
 % table_po_TT = createTimetable(table_po);
 % 
-% table_pdmp = readDataBySensorName("pdmp")d;
+% table_pdmp = readDataBySensorName("pdmp");
 % table_pdmp_TT = createTimetable(table_pdmp);
 
 
