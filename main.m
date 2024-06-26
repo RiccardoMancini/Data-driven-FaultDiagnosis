@@ -31,7 +31,7 @@ addpath("./utils/");
 
 
 % LETTURA E CREAZIONE DI TABLE CON FAULT E TIMETABLE PER OGNI SENSORE
-% table_pin= readDataBySensorName("pin");
+% table_pin = readDataBySensorName("pin");
 % table_pin_TT = createTimetable(table_pin);
 % 
 % table_po = readDataBySensorName("po");
@@ -43,17 +43,17 @@ addpath("./utils/");
 
 % AGGIUNTA NOME SENSORE ALLE COLONNE 
 % (DA RUNNARE POST ESTRAZIONE FEATURES) (da cambiare manualmente sia il nome che la variabile table)
-% for i = 2:width(poFeature)
-%     poFeature.Properties.VariableNames{i} = ['PO/', poFeature.Properties.VariableNames{i}];
+% for i = 2:width(POFeatures)
+%     POFeatures.Properties.VariableNames{i} = ['PO/', POFeatures.Properties.VariableNames{i}];
 % end
 % 
 % clear i;
 
 
 % POST CONCATENAZIONE FEATURES IN UN'UNICA TABELLA
-% T1 = pdmpFeature;
-% T2 = pinFeature;
-% T3 = poFeature;
+% T1 = PDMPFeatures;
+% T2 = PINFeatures;
+% T3 = POFeatures;
 % T2.Fault = [];
 % T3.Fault = [];
 % 
@@ -72,6 +72,15 @@ addpath("./utils/");
 % testSet = testSet(:, idx);
 % clear idx;
 
+% TEST CON SOLO I NON GUASTI
+% testSet1 = testSet(testSet.Fault == 1, :);
 
-% PLOT DEI SEGNALI
-% plotSignal(table_po_TT, 500)
+% PLOTS
+% plotSignal(Ensemble1PO, 5000);
+
+
+%plotClassDistribution(trainingSet.(1))
+plotClassDistribution(yfit)
+
+
+
