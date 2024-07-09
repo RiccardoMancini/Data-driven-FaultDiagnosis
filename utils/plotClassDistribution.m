@@ -1,24 +1,26 @@
 function plotClassDistribution (classes)
-    figure;
+% plotClassDistribution(classes)
+% Restituisce il plot di un istogramma della distribuzione delle classi.
+%
+% Input:
+%   classes: Vettore contenente le classi (numeriche o categoriche) di cui si vuole visualizzare la distribuzione.
+%
+% Output:
+%   Un grafico a barre (istogramma) che mostra il numero di occorrenze per ciascuna classe.
 
-    %h = histogram(trainingSet.(1), 11); % plot distribuzione classi
-    h = histogram(classes, 11); % plot distrubuzione predizioni
-    
-    % Ottieni i valori dell'asse x e y per ogni barra
-    x = h.BinEdges(1:end-1) + diff(h.BinEdges)/2; % Centro delle barre
-    y = h.Values;
-    
-    % Visualizza i valori numerici sopra le barre
-    for i = 1:length(x)
-        text(x(i), y(i), num2str(y(i)), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom');
-    end
-    
-    % Etichette e titolo
-    xlabel('Classe')
-    ylabel('Numero di Occorrenze')
-    title('Distribuzione delle Predizioni di Classe')
-    
-    % Imposta il limite massimo dell'asse y a 5000
-    ylim([0, max(y)+300])
+figure;
+
+h = histogram(classes, 11); % plot distribuzione predizioni
+
+x = h.BinEdges(1:end-1) + diff(h.BinEdges)/2; % centro delle barre
+y = h.Values;
+
+for i = 1:length(x)
+    text(x(i), y(i), num2str(y(i)), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom');
 end
 
+xlabel('Classe')
+ylabel('Numero di Occorrenze')
+title('Distribuzione delle Predizioni di Classe')
+ylim([0, max(y)+300])
+end
