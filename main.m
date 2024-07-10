@@ -1,4 +1,4 @@
-% #### NOTE INIZIALI ####
+% ####################### NOTE INIZIALI #######################
 %
 % - Le fasi 1, 2, 3, 4 di tale script sono state ripetute sia per i dati di
 %    training che per quelli di test.
@@ -6,7 +6,7 @@
 % - Nella cartella di consegna sono già stati forniti "trainingset" e "testset" 
 %   elaborati e pre-processati per essere impiegati nelle fasi 8 e 9.
 %
-% #######################
+% #############################################################
 
 
 
@@ -23,13 +23,13 @@ addpath("./models-function (with cvp)/");
 %   temporali
 % - Memorizza i dati grezzi e le timetable in opportune strutture dati
 
-% table_pin = readDataBySensorName("pin", "./data/");
+% table_pin = readDataBySensorName("pin", "./train-data/");
 % table_pin_TT = createTimetable(table_pin);
 % 
-% table_po = readDataBySensorName("po", "./data/");
+% table_po = readDataBySensorName("po", "./train-data/");
 % table_po_TT = createTimetable(table_po);
 % 
-% table_pdmp = readDataBySensorName("pdmp", "./data/");
+% table_pdmp = readDataBySensorName("pdmp", "./train-data/");
 % table_pdmp_TT = createTimetable(table_pdmp);
 
 
@@ -37,6 +37,7 @@ addpath("./models-function (with cvp)/");
 % ################ 2) FASE DFD Tool (Estrazione features) ################
 % 2.1) PLOT DEI SEGNALI
 % - Consente di visualizzare a schermo i segnali esportati dal DFD
+
 % plotSignal(Ensemble1PO, 5000);
 
 
@@ -104,7 +105,7 @@ addpath("./models-function (with cvp)/");
 
 
 
-% ########## 7) FASE Classification Learner Tool (addestramento) ##########
+% ########## 7) FASE Classification Learner Tool (cross-val senza stratificazione) #########
 % 7.1)  FASE Classification Learner Tool (test dei campioni non guasti):
 % - Filtra il test set da tutti i campioni di cui non si conosce la classe
 %   (classe 0)
@@ -115,18 +116,17 @@ addpath("./models-function (with cvp)/");
 
 
 
-% 8) ADDESTRAMENTO E VALUTAZIONE DEL MODELLO TRAMITE CROSS-VALIDATION CON
+% 8) ADDESTRAMENTO E VALIDAZIONE DEL MODELLO TRAMITE CROSS-VALIDATION CON
 %    STRATIFICAZIONE:
 % - Addestra un modello di classificazione utilizzando la funzione specifica
 % - Calcola e visualizza l'accuratezza di validazione del modello
 
 % Addestra il modello cubicSVM (da modificare con le funzioni presenti nella cartella "models-function (with cvp)")
-% [trainedClassifier, validationAccuracy] = cubicSVM(trainingSet); %
-% yfit = trainedClassifier.predictFcn(testSet); % Calcola le predizioni sul test set
-% validationAccuracy = 1 - loss(trainedClassifier.ClassificationSVM, testSet(:, predictorNames), testSet.Fault, 'LossFun', 'ClassifError'); % Calcola l'accuratezza di validazione
+% [trainedClassifier, validationAccuracy] = cubicSVM(trainingSet);
+% yfit = trainedClassifier.predictFcn(testSet); % Vettore contente le classi predette
 
 
 
 % 9) VISUALIZZAZIONE DELLA DISTRIBUZIONE DELLE CLASSI PREDETTE:
 
-%plotClassDistribution(yfit); % Visualizza la distribuzione delle classi predette
+% plotClassDistribution(yfit); % Visualizza la distribuzione delle classi predette
