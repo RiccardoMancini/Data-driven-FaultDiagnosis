@@ -3,9 +3,9 @@ function plotSignal(table_TT, nRows)
 % Visualizza le serie temporali o gli spettri di potenza raggruppati per fault code.
 %
 % Input:
-%   table_TT: Timetable contenente le serie temporali (o gli spettri) e i fault code corrispondenti.
-%             Si assume che la timetable abbia una colonna 'Fault' e una colonna 'Serie' (serie temporali o spettri).
-%   nRows:    Numero massimo di righe (campioni) da visualizzare per ogni campione.
+%   table_TT: Tabella contenente le serie temporali (o gli spettri) e i fault code corrispondenti.
+%             Si assume che la tabella abbia una colonna 'Fault' e una colonna 'Serie' (serie temporali o spettri).
+%   nRows:    Numero massimo di campioni da visualizzare.
 %
 % Output:
 %   Un grafico a linee in cui ogni fault code è rappresentato da un colore diverso. 
@@ -35,7 +35,7 @@ for i = 1:length(uniqueFaults)
     
     for j = 1:height(faultData)
         serie = faultData.Serie{j};
-        % plot(serie.Time, serie.Var1, 'Color', color);
+        % plot(serie.Time, serie.Var1, 'Color', color); % per le serie temporali
         plot(serie.Frequency, serie.SpectrumData, 'Color', color);
         handles{i} = plot(NaN, NaN, 'Color', color, 'DisplayName', ['Fault ' num2str(fault)]);
     end
@@ -45,8 +45,8 @@ hold off;
 handles = handles(~cellfun('isempty',handles));
 
 legend([handles{:}], 'Location', 'northwest');
-% xlabel('Time [ms]');
-% ylabel('Pressure [-]');
+% xlabel('Time [ms]');     % per le serie temporali
+% ylabel('Pressure [-]');  % per le serie temporali
 xlabel('Frequency [kHz]');
 ylabel('Power [dB]');
 title('Serie temporali raggruppate per fault-code');

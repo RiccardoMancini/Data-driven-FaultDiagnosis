@@ -3,7 +3,8 @@ function fullTable = reformatColumnsName(T)
 % Riformatta i nomi delle colonne di una tabella, rimuovendo la parte centrale se presente.
 %
 % Input:
-%   T: Tabella di dati in cui i nomi delle colonne possono avere il formato "<sensore>/<dir>/<feature>" o "<sensore>/<feature>".
+%   T: Tabella di dati in cui i nomi delle colonne possono avere il formato
+%      "<sensore>/<dir>/<feature>" o "<sensore>/<feature>".
 %
 % Output:
 %   fullTable: Tabella con i nomi delle colonne riformattati nel formato "<sensore>/<feature>", 

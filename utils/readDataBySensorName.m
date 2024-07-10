@@ -1,15 +1,16 @@
-function fullDataTable = readDataBySensorName(sensore)
+function fullDataTable = readDataBySensorName(sensore, path)
 % fullDataTable = readDataBySensorName(sensore)
 % Legge i dati dai file CSV del sensore specificato e li unisce in una tabella.
 %
 % Input:
 %   sensore: Nome del sensore (stringa, es. "pin").
+%   path: Percorso da cui leggere i file CSV.
 %
 % Output:
 %   fullDataTable: Tabella contenente i dati di tutti i file CSV del sensore.
 
 
-file_list = dir("./data/"); % da sostituire con la directory contenente i file csv di train
+file_list = dir(path);
 
 % Scansione dei file CSV nella directory specificata
 matching_files = [];
@@ -26,7 +27,7 @@ colonnaEtichetta = 1;
 max_columns = 513; % 1 fault code + 512 istanti temporali
 for i = 1:length(matching_files)        
     disp(strcat("In elaborazione: ", matching_files(i)));
-    dataTable = readtable(strcat("./data/", matching_files(i)), 'ReadVariableNames', false);
+    dataTable = readtable(strcat(path, matching_files(i)), 'ReadVariableNames', false);
     dataTable = dataTable(: , 1:max_columns);
     
     % Conversione delle celle della tabella in numeri decimali

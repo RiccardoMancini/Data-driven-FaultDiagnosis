@@ -1,30 +1,42 @@
+% #### NOTE INIZIALI ####
+%
+% - Le fasi 1, 2, 3, 4 di tale script sono state ripetute sia per i dati di
+%    training che per quelli di test.
+% - La fase 5 non è più necessaria (si rimanda al Capitolo 2 della relazione).
+% - Nella cartella di consegna sono già stati forniti "trainingset" e "testset" 
+%   elaborati e pre-processati per essere impiegati nelle fasi 8 e 9.
+%
+% #######################
+
+
+
+% Aggiunge le cartelle "utils" e "models-function (with cvp)" al percorso 
+% di ricerca di MATLAB per consentire l'accesso alle funzioni in esse contenute
 addpath("./utils/");
 addpath("./models-function (with cvp)/");
 
-% LE FASI 1, 2, 3, ... SONO STATE RIPETUTE SIA PER I DATI DI TRAIN CHE PER
-% QUELLI DI TEST
-
-% LA FASE 5 NON E' PIU' NECESSARIA (si rimanda al capitolo 3 della relazione)
 
 % 1) CARICAMENTO E PREPARAZIONE DATI PER OGNI SENSORE:
-% - Legge i dati grezzi da file CSV per ogni sensore specificato.
+% - Legge i dati grezzi da file CSV per ogni sensore specificato come
+%   parametro
 % - Converte i dati in timetable, creando una colonna 'Serie' per le serie 
-%   temporali.
-% - Memorizza i dati grezzi e le timetable nelle opportune strutture dati
+%   temporali
+% - Memorizza i dati grezzi e le timetable in opportune strutture dati
 
-% table_pin = readDataBySensorName("pin");
+% table_pin = readDataBySensorName("pin", "./data/");
 % table_pin_TT = createTimetable(table_pin);
 % 
-% table_po = readDataBySensorName("po");
+% table_po = readDataBySensorName("po", "./data/");
 % table_po_TT = createTimetable(table_po);
 % 
-% table_pdmp = readDataBySensorName("pdmp");
+% table_pdmp = readDataBySensorName("pdmp", "./data/");
 % table_pdmp_TT = createTimetable(table_pdmp);
 
 
 
 % ################ 2) FASE DFD Tool (Estrazione features) ################
 % 2.1) PLOT DEI SEGNALI
+% - Consente di visualizzare a schermo i segnali esportati dal DFD
 % plotSignal(Ensemble1PO, 5000);
 
 
@@ -39,13 +51,13 @@ addpath("./models-function (with cvp)/");
 % end
 % 
 % clear i;
-
+%
 % for i = 2:width(PINFeatures)
 %     PINFeatures.Properties.VariableNames{i} = ['PIN/', PINFeatures.Properties.VariableNames{i}];
 % end
 % 
 % clear i;
-
+%
 % for i = 2:width(PDMPFeatures)
 %     PDMPFeatures.Properties.VariableNames{i} = ['PDMP/', PDMPFeatures.Properties.VariableNames{i}];
 % end
@@ -62,8 +74,7 @@ addpath("./models-function (with cvp)/");
 % T2 = PINFeatures;
 % T3 = POFeatures;
 % T2.Fault = [];
-% T3.Fault = [];
-% 
+% T3.Fault = []; 
 % T = [T1(:, :), T2(:, :), T3(:, :)];
 
 
@@ -94,23 +105,28 @@ addpath("./models-function (with cvp)/");
 
 
 % ########## 7) FASE Classification Learner Tool (addestramento) ##########
-% 7.1)  FASE Classification Learner Tool (test dei campioni non guasti)
+% 7.1)  FASE Classification Learner Tool (test dei campioni non guasti):
+% - Filtra il test set da tutti i campioni di cui non si conosce la classe
+%   (classe 0)
+% - Il risultato di tale filtraggio (testSet1) dovrà essere importato nel 
+%   tool per darli in pasto ai modelli addestrati
+
 % testSet1 = testSet(testSet.Fault == 1, :);
 
 
 
-% 8) ADDESTRAMENTO E VALUTAZIONE DEL MODELLO CON CLASSIFICATION LEARNER:
-% - Addestra un modello di classificazione utilizzando la funzione
-%   specifica
+% 8) ADDESTRAMENTO E VALUTAZIONE DEL MODELLO TRAMITE CROSS-VALIDATION CON
+%    STRATIFICAZIONE:
+% - Addestra un modello di classificazione utilizzando la funzione specifica
 % - Calcola e visualizza l'accuratezza di validazione del modello
 
-% [trainedClassifier, validationAccuracy] = cubicSVM(trainingSet); % Addestra il modello
+% Addestra il modello cubicSVM (da modificare con le funzioni presenti nella cartella "models-function (with cvp)")
+% [trainedClassifier, validationAccuracy] = cubicSVM(trainingSet); %
 % yfit = trainedClassifier.predictFcn(testSet); % Calcola le predizioni sul test set
 % validationAccuracy = 1 - loss(trainedClassifier.ClassificationSVM, testSet(:, predictorNames), testSet.Fault, 'LossFun', 'ClassifError'); % Calcola l'accuratezza di validazione
 
 
 
 % 9) VISUALIZZAZIONE DELLA DISTRIBUZIONE DELLE CLASSI PREDETTE:
-% - Mostra la distribuzione delle etichette di classe predette dal modello
 
 %plotClassDistribution(yfit); % Visualizza la distribuzione delle classi predette
