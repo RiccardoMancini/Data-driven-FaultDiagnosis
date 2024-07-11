@@ -20,7 +20,7 @@ for i = 1:length(file_list)
     end
 end
 
- % Letture e unione dei dati da ciascun file
+% Letture e unione dei dati da ciascun file
 matching_files = string(matching_files);
 fullDataTable = [];
 colonnaEtichetta = 1;
