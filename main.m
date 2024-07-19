@@ -3,7 +3,7 @@
 % - Le fasi 1, 2, 3, 4 di tale script sono state ripetute sia per i dati di
 %    training che per quelli di test.
 % - La fase 5 non è più necessaria (si rimanda al Capitolo 2 della relazione).
-% - Nella cartella di consegna sono già stati forniti "trainingset" e "testset" 
+% - Nella cartella di consegna sono già stati forniti "trainingSet" e "testSet" 
 %   elaborati e pre-processati per essere impiegati nelle fasi 8 e 9.
 %
 % #############################################################
@@ -119,7 +119,7 @@ addpath("./models-function (with cvp)/");
 % 8) ADDESTRAMENTO E VALIDAZIONE DEL MODELLO TRAMITE CROSS-VALIDATION CON
 %    STRATIFICAZIONE:
 % - Addestra un modello di classificazione utilizzando la funzione specifica
-% - Calcola e visualizza l'accuratezza di validazione del modello
+% - Calcola l'accuratezza di validazione del modello
 
 % Addestra il modello cubicSVM (da modificare con le funzioni presenti nella cartella "models-function (with cvp)")
 % [trainedClassifier, validationAccuracy] = cubicSVM(trainingSet);
